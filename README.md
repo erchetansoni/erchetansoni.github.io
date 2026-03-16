@@ -4,12 +4,12 @@
   
   ![Profile Banner](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=200&section=header&text=Chetan%20Soni&fontSize=50&fontColor=fff&animation=twinkling&fontAlignY=35&desc=Lead%20DevOps%20%7C%20Cloud%20Platform%20Engineer&descSize=20&descAlignY=55)
 
-  [![Portfolio](https://img.shields.io/badge/Portfolio-chetansoni--it.github.io-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://chetansoni-it.github.io/chetansoni-it/)
+  [![Portfolio](https://img.shields.io/badge/Portfolio-ErChetanSoni.github.io-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://ErChetanSoni.github.io/)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-sonichetan-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sonichetan/)
   [![Email](https://img.shields.io/badge/Email-chetansoni9991%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:chetansoni9991@gmail.com)
   
-  ![Profile Views](https://komarev.com/ghpvc/?username=chetansoni-it&style=for-the-badge&color=6366f1)
-  ![Followers](https://img.shields.io/github/followers/chetansoni-it?style=for-the-badge&color=6366f1)
+  ![Profile Views](https://komarev.com/ghpvc/?username=ErChetanSoni&style=for-the-badge&color=6366f1)
+  ![Followers](https://img.shields.io/github/followers/ErChetanSoni?style=for-the-badge&color=6366f1)
 
 </div>
 
@@ -122,20 +122,20 @@ open_to: Collaboration, DevOps Consulting, Cloud Architecture Projects
 
 <div align="center">
   
-  <img width="49%" src="https://github-readme-stats-fast.vercel.app/api?username=chetansoni-it&show_icons=true&theme=tokyonight" />
-  <img width="49%" src="https://github-readme-stats-fast.vercel.app/api/streak?username=chetansoni-it&theme=tokyonight" />
+  <img width="49%" src="https://github-readme-stats-fast.vercel.app/api?username=ErChetanSoni&show_icons=true&theme=tokyonight" />
+  <img width="49%" src="https://github-readme-stats-fast.vercel.app/api/streak?username=ErChetanSoni&theme=tokyonight" />
   
 </div>
 
 <div align="center">
   
-  ![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=chetansoni-it&theme=tokyo-night&hide_border=true&bg_color=0d1117&color=6366f1&line=6366f1&point=6366f1)
+  ![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=ErChetanSoni&theme=tokyo-night&hide_border=true&bg_color=0d1117&color=6366f1&line=6366f1&point=6366f1)
   
 </div>
 
 <div align="center">
   
-  ![Top Languages](https://github-readme-stats-fast.vercel.app/api/top-langs?username=chetansoni-it&layout=compact&theme=tokyonight&hide_border=true)
+  ![Top Languages](https://github-readme-stats-fast.vercel.app/api/top-langs?username=ErChetanSoni&layout=compact&theme=tokyonight&hide_border=true)
   
 </div>
 
@@ -158,10 +158,10 @@ open_to: Collaboration, DevOps Consulting, Cloud Architecture Projects
 
 <div align="center">
 
-[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin?username=chetansoni-it&repo=particle41-devops-challenge-senior&theme=tokyonight&hide_border=true)](https://github.com/chetansoni-it/particle41-devops-challenge-senior)
-[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin?username=chetansoni-it&repo=node-postgres-redis-valkey&theme=tokyonight&hide_border=true)](https://github.com/chetansoni-it/node-postgres-redis-valkey)
-[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin?username=chetansoni-it&repo=chaos-monkey&theme=tokyonight&hide_border=true)](https://github.com/chetansoni-it/chaos-monkey)
-[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin?username=chetansoni-it&repo=authelia&theme=tokyonight&hide_border=true)](https://github.com/chetansoni-it/authelia)
+[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin?username=ErChetanSoni&repo=particle41-devops-challenge-senior&theme=tokyonight&hide_border=true)](https://github.com/ErChetanSoni/particle41-devops-challenge-senior)
+[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin?username=ErChetanSoni&repo=node-postgres-redis-valkey&theme=tokyonight&hide_border=true)](https://github.com/ErChetanSoni/node-postgres-redis-valkey)
+[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin?username=ErChetanSoni&repo=chaos-monkey&theme=tokyonight&hide_border=true)](https://github.com/ErChetanSoni/chaos-monkey)
+[![Readme Card](https://github-readme-stats-fast.vercel.app/api/pin?username=ErChetanSoni&repo=authelia&theme=tokyonight&hide_border=true)](https://github.com/ErChetanSoni/authelia)
 
 </div>
 
@@ -187,10 +187,10 @@ gantt
 
 | Platform | Link |
 |:--------:|:----:|
-| 🌐 **Portfolio** | [chetansoni-it.github.io/chetansoni-it](https://chetansoni-it.github.io/chetansoni-it/) |
+| 🌐 **Portfolio** | [ErChetanSoni.github.io](https://ErChetanSoni.github.io/) |
 | 💼 **LinkedIn** | [linkedin.com/in/sonichetan](https://www.linkedin.com/in/sonichetan/) |
 | 📧 **Email** | [chetansoni9991@gmail.com](mailto:chetansoni9991@gmail.com) |
-| 🐙 **GitHub** | [github.com/chetansoni-it](https://github.com/chetansoni-it) |
+| 🐙 **GitHub** | [github.com/ErChetanSoni](https://github.com/ErChetanSoni) |
 
 </div>
 
@@ -208,6 +208,6 @@ gantt
   
   ![Footer](https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=6,11,20&height=100&section=footer)
   
-  ⭐️ From [chetansoni-it](https://github.com/chetansoni-it) with ❤️
+  ⭐️ From [ErChetanSoni](https://github.com/ErChetanSoni) with ❤️
   
 </div>

@@ -10,7 +10,7 @@ const CONFIG = {
     typingDeleteSpeed: 50,
     typingPause: 2000,
     counterDuration: 2000,
-    githubUsername: 'chetansoni-it',
+    githubUsername: 'ErChetanSoni',
     titles: [
         'Lead DevOps Engineer',
         'Cloud Platform Architect',
@@ -30,7 +30,7 @@ const projectsData = [
         description: 'Senior DevOps challenge showcasing Terraform, AWS ECS, and infrastructure automation skills.',
         tech: ['Terraform', 'AWS', 'ECS', 'HCL'],
         category: 'devops',
-        github: 'https://github.com/chetansoni-it/particle41-devops-challenge-senior',
+        github: 'https://github.com/ErChetanSoni/particle41-devops-challenge-senior',
         icon: 'fas fa-cloud'
     },
     {
@@ -39,7 +39,7 @@ const projectsData = [
         description: 'Full-stack application with Node.js, PostgreSQL database, and Redis/Valkey caching.',
         tech: ['Node.js', 'PostgreSQL', 'Redis', 'Docker'],
         category: 'infra',
-        github: 'https://github.com/chetansoni-it/node-postgres-redis-valkey',
+        github: 'https://github.com/ErChetanSoni/node-postgres-redis-valkey',
         icon: 'fas fa-database'
     },
     {
@@ -48,7 +48,7 @@ const projectsData = [
         description: 'Chaos engineering tool for testing system resilience and fault tolerance.',
         tech: ['Shell', 'Kubernetes', 'DevOps'],
         category: 'devops',
-        github: 'https://github.com/chetansoni-it/chaos-monkey',
+        github: 'https://github.com/ErChetanSoni/chaos-monkey',
         icon: 'fas fa-bug'
     },
     {
@@ -57,7 +57,7 @@ const projectsData = [
         description: 'Multi-factor authentication solution for securing applications and services.',
         tech: ['Docker', 'Security', 'OAuth'],
         category: 'infra',
-        github: 'https://github.com/chetansoni-it/authelia',
+        github: 'https://github.com/ErChetanSoni/authelia',
         icon: 'fas fa-shield-alt'
     },
     {
@@ -66,7 +66,7 @@ const projectsData = [
         description: 'Python-based email automation tool for batch processing and sending.',
         tech: ['Python', 'SMTP', 'Automation'],
         category: 'automation',
-        github: 'https://github.com/chetansoni-it/send-email',
+        github: 'https://github.com/ErChetanSoni/send-email',
         icon: 'fas fa-envelope'
     },
     {
@@ -75,7 +75,7 @@ const projectsData = [
         description: 'High-performance API handling with FastAPI framework and async capabilities.',
         tech: ['Python', 'FastAPI', 'REST API'],
         category: 'automation',
-        github: 'https://github.com/chetansoni-it/FastAPI-handling-requests',
+        github: 'https://github.com/ErChetanSoni/FastAPI-handling-requests',
         icon: 'fas fa-bolt'
     },
     {
@@ -84,7 +84,7 @@ const projectsData = [
         description: 'Containerized PostgreSQL with pgAdmin for database management.',
         tech: ['Docker', 'PostgreSQL', 'pgAdmin'],
         category: 'infra',
-        github: 'https://github.com/chetansoni-it/PostgresSQL-pgAdmin4-Docker',
+        github: 'https://github.com/ErChetanSoni/PostgresSQL-pgAdmin4-Docker',
         icon: 'fas fa-server'
     },
     {
@@ -93,7 +93,7 @@ const projectsData = [
         description: 'Business intelligence platform with MySQL backend for data visualization.',
         tech: ['Metabase', 'MySQL', 'Docker'],
         category: 'infra',
-        github: 'https://github.com/chetansoni-it/metabase-mysql',
+        github: 'https://github.com/ErChetanSoni/metabase-mysql',
         icon: 'fas fa-chart-bar'
     }
 ];
