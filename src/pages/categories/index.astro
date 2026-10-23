@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Breadcrumb from "@/components/Breadcrumb.astro";
+import Main from "@/components/Main.astro";
+import Footer from "@/components/Footer.astro";
+import CategoryBadge from "@/components/CategoryBadge.astro";
+import { getUniqueCategories } from "@/utils/getUniqueCategories";
+import config from "@/config";
+
+const posts = await getCollection("posts");
+const categories = getUniqueCategories(posts);
+---
+
+<Layout title={`Categories | ${config.site.title}`}>
+  <Header />
+
+  <Breadcrumb />
+
+  <Main
+    pageTitle="Categories"
+    pageDesc="Browse technical articles and architecture guides grouped by topic."
+  >
+    <div class="mt-8 flex flex-wrap gap-4">
+      {
+        categories.length > 0 ? (
+          categories.map(({ categoryName, count }) => (
+            <CategoryBadge category={categoryName} size="base" {count} />
+          ))
+        ) : (
+          <p class="text-muted-foreground">No categories found.</p>
+        )
+      }
+    </div>
+  </Main>
+
+  <Footer />
+</Layout>
