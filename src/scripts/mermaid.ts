@@ -21,38 +21,45 @@ export async function renderMermaidDiagrams() {
   try {
     m.initialize({
       startOnLoad: false,
+      suppressErrorRendering: true,
       theme: isDark ? "dark" : "default",
       securityLevel: "loose",
       fontFamily: "var(--font-app, system-ui, sans-serif)",
-      themeVariables: {
-        fontSize: "14px",
-        darkMode: isDark,
-      },
     });
-  } catch (initErr) {
-    console.warn("Failed to initialize Mermaid:", initErr);
+  } catch (err) {
+    console.warn("Failed to initialize Mermaid:", err);
   }
 
   for (let i = 0; i < blocks.length; i++) {
     const block = blocks[i];
-    const codeEl = block.querySelector<HTMLElement>(".mermaid-src");
+    const codeEl =
+      block.querySelector<HTMLElement>(".mermaid-src") ??
+      block.querySelector<HTMLElement>("pre.mermaid");
     const targetEl = block.querySelector<HTMLElement>(".mermaid-render-target");
-    if (!codeEl || !targetEl) continue;
-
-    const rawCode = (codeEl.textContent || "").trim();
-    if (!rawCode) {
-      targetEl.innerHTML = "";
+    if (!codeEl || !targetEl) {
+      block.setAttribute("data-rendered", "error");
       continue;
     }
 
-    const uniqueId = `mermaid-svg-${i}-${Date.now().toString(36)}`;
+    // Clone element to safely strip any copy button injected by code block postprocessors
+    const clone = codeEl.cloneNode(true) as HTMLElement;
+    clone.querySelectorAll("button").forEach(b => b.remove());
+    const rawCode = (clone.textContent || "").trim();
+
+    if (!rawCode) {
+      targetEl.innerHTML = "";
+      block.setAttribute("data-rendered", "true");
+      continue;
+    }
+
+    const uniqueId = `mermaid-chart-${i}-${Date.now().toString(36)}`;
 
     try {
       const { svg } = await m.render(uniqueId, rawCode);
       targetEl.innerHTML = svg;
       block.setAttribute("data-rendered", "true");
     } catch (err: any) {
-      console.warn("Mermaid diagram rendering error for diagram index", i, err);
+      console.warn("Mermaid syntax parsing or rendering notice for block", i, err?.message ?? err);
       block.setAttribute("data-rendered", "error");
       targetEl.innerHTML = `
         <div class="mermaid-fallback-box w-full max-w-2xl mx-auto my-4 p-4 rounded-lg border border-amber-500/30 bg-amber-500/10 dark:border-amber-400/30 dark:bg-amber-400/10 text-left text-sm">
@@ -70,7 +77,7 @@ export async function renderMermaidDiagrams() {
   }
 }
 
-// Automatically render on DOM ready and after Astro page transitions
+// Automatically trigger on load and page swaps
 if (typeof window !== "undefined") {
   if (document.readyState === "complete" || document.readyState === "interactive") {
     renderMermaidDiagrams();
@@ -79,7 +86,6 @@ if (typeof window !== "undefined") {
   document.addEventListener("astro:page-load", () => renderMermaidDiagrams());
   document.addEventListener("astro:after-swap", () => renderMermaidDiagrams());
 
-  // Also re-render if theme toggled
   const observer = new MutationObserver(mutations => {
     for (const mutation of mutations) {
       if (mutation.attributeName === "data-theme") {
