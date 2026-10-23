@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { toTransitionName } from "@/utils/toTransitionName";
+import { getReadingTime } from "@/utils/readingTime";
+import { getPostCategories } from "@/utils/getUniqueCategories";
+import Datetime from "./Datetime.astro";
+import CategoryBadge from "./CategoryBadge.astro";
+
+type Props = {
+  variant?: "h2" | "h3";
+} & CollectionEntry<"posts">;
+
+const post = Astro.props;
+const { variant: Heading = "h2", id, data, filePath, body } = post;
+const { title, description, ...props } = data;
+const readingTime = getReadingTime(body);
+const categories = getPostCategories(post);
+---
+
+<li class="my-6">
+  <div class="mb-1 flex flex-wrap items-center gap-2">
+    {categories.map(cat => <CategoryBadge category={cat} size="sm" />)}
+  </div>
+  <a
+    href={getPostUrl(id, filePath, Astro.currentLocale)}
+    class:list={[
+      "text-accent inline-block text-lg font-medium",
+      "decoration-dashed underline-offset-4 hover:underline",
+      "focus-visible:no-underline focus-visible:underline-offset-0",
+    ]}
+  >
+    <Heading transition:name={toTransitionName(id)}>
+      {title}
+    </Heading>
+  </a>
+  <div class="flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
+    <Datetime {...props} />
+    <span aria-hidden="true">&bull;</span>
+    <span class="reading-time">{readingTime}</span>
+  </div>
+  <p class="mt-1">{description}</p>
+</li>

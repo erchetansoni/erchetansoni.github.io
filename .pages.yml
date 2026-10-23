@@ -1,0 +1,168 @@
+# Pages CMS Configuration
+# Documentation: https://pagescms.org/docs/configuration/
+
+media:
+  input: public/images/blog
+  output: /images/blog
+
+content:
+  - name: posts
+    label: Blog Posts
+    type: collection
+    path: src/content/posts
+    format: yaml-frontmatter
+    filename: "{fields.slug}.md"
+    view:
+      fields: [title, pubDatetime, draft, featured]
+      primary: title
+      sort: pubDatetime
+      order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: description
+        label: Description / Excerpt
+        type: string
+        required: true
+      - name: pubDatetime
+        label: Publication Date
+        type: date
+        time: true
+        required: true
+      - name: modDatetime
+        label: Modification Date
+        type: date
+        time: true
+      - name: author
+        label: Author
+        type: string
+        default: Chetan Soni
+      - name: featured
+        label: Featured Post
+        type: boolean
+        default: false
+      - name: draft
+        label: Draft Status
+        type: boolean
+        default: false
+      - name: category
+        label: Primary Category
+        type: string
+        default: DevOps
+      - name: categories
+        label: Categories
+        type: list
+        default:
+          - DevOps
+      - name: tags
+        label: Tags
+        type: list
+        default:
+          - devops
+          - kubernetes
+      - name: ogImage
+        label: Open Graph Image
+        type: image
+      - name: canonicalURL
+        label: Canonical URL
+        type: string
+      - name: body
+        label: Content
+        type: rich-text
+
+  - name: pages
+    label: Standalone Pages
+    type: collection
+    path: src/content/pages
+    format: yaml-frontmatter
+    view:
+      fields: [title, description]
+      primary: title
+    fields:
+      - name: title
+        label: Page Title
+        type: string
+        required: true
+      - name: description
+        label: Page Description
+        type: string
+      - name: ogImage
+        label: Open Graph Image
+        type: image
+      - name: canonicalURL
+        label: Canonical URL
+        type: string
+      - name: body
+        label: Content
+        type: rich-text
+
+  - name: projects
+    label: Portfolio Projects
+    type: collection
+    path: src/content/projects
+    format: yaml-frontmatter
+    view:
+      fields: [title, category, featured, order]
+      primary: title
+      sort: order
+      order: asc
+    fields:
+      - name: title
+        label: Project Title
+        type: string
+        required: true
+      - name: description
+        label: Summary Description
+        type: string
+        required: true
+      - name: category
+        label: Category
+        type: string
+        default: DevOps
+      - name: tech
+        label: Technologies Used
+        type: list
+      - name: github
+        label: GitHub Repository URL
+        type: string
+      - name: link
+        label: Live Demo / Documentation URL
+        type: string
+      - name: featured
+        label: Featured Project
+        type: boolean
+        default: false
+      - name: order
+        label: Display Order
+        type: number
+        default: 10
+      - name: body
+        label: Detailed Notes
+        type: rich-text
+
+settings:
+  - name: site
+    label: Site Settings
+    type: file
+    path: src/content/settings/site.json
+    fields:
+      - name: title
+        label: Site Title
+        type: string
+      - name: description
+        label: Site Description
+        type: string
+      - name: author
+        label: Default Author
+        type: string
+      - name: profile
+        label: Author Profile URL
+        type: string
+      - name: email
+        label: Contact Email
+        type: string
+      - name: location
+        label: Location
+        type: string
