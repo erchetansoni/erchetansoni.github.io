@@ -31,7 +31,7 @@ export default defineAstroPaperConfig({
     { name: "github", url: "https://github.com/ErChetanSoni" },
     { name: "linkedin", url: "https://www.linkedin.com/in/sonichetan/" },
     { name: "mail", url: "mailto:ErChetanSoni@gmail.com" },
-    { name: "whatsapp", url: "https://wa.me/+919770325511" },
+    { name: "telegram", url: "https://t.me/ErChetanSoni" },
   ],
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },
