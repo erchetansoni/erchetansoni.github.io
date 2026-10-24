@@ -1,0 +1,144 @@
+---
+---
+
+<div class="relative w-full max-w-lg mx-auto rounded-2xl bg-paper-deep border border-line shadow-2xl p-5 overflow-hidden">
+  <!-- Glowing ambient corner accent -->
+  <div class="absolute -top-12 -right-12 size-36 rounded-full bg-violet/20 blur-2xl pointer-events-none"></div>
+
+  <!-- Terminal Window Bar -->
+  <div class="flex items-center justify-between pb-3 border-b border-line mb-4">
+    <div class="flex items-center gap-1.5">
+      <span class="size-2.5 rounded-full bg-rose-500/80"></span>
+      <span class="size-2.5 rounded-full bg-amber-500/80"></span>
+      <span class="size-2.5 rounded-full bg-emerald-500/80"></span>
+      <span class="text-[11px] font-mono text-muted ml-2">platform-control-plane.k8s</span>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span class="text-[11px] font-mono font-medium text-emerald-500">Live Active Mesh</span>
+    </div>
+  </div>
+
+  <!-- Interactive Telemetry Tabs -->
+  <div class="flex items-center gap-1.5 p-1 rounded-lg bg-paper mb-4 text-xs font-mono" id="telemetry-tabs">
+    <button
+      class="telemetry-tab active px-3 py-1 rounded-md font-semibold text-violet bg-paper-deep border border-violet/30 transition-all"
+      data-tab="clusters"
+    >
+      Clusters
+    </button>
+    <button
+      class="telemetry-tab px-3 py-1 rounded-md text-muted hover:text-ink transition-all"
+      data-tab="gitops"
+    >
+      GitOps (ArgoCD)
+    </button>
+    <button
+      class="telemetry-tab px-3 py-1 rounded-md text-muted hover:text-ink transition-all"
+      data-tab="security"
+    >
+      Zero-Trust
+    </button>
+  </div>
+
+  <!-- Tab Content: Clusters -->
+  <div id="tab-clusters" class="telemetry-content space-y-2.5 font-mono text-xs">
+    <div class="flex items-center justify-between p-2.5 rounded-lg bg-paper/60 border border-line">
+      <div class="flex items-center gap-2">
+        <span class="text-teal font-bold">AWS EKS prod-east</span>
+        <span class="text-[10px] text-muted">(us-east-1)</span>
+      </div>
+      <span class="text-emerald-500 font-semibold">Ready · 12 Nodes</span>
+    </div>
+
+    <div class="flex items-center justify-between p-2.5 rounded-lg bg-paper/60 border border-line">
+      <div class="flex items-center gap-2">
+        <span class="text-violet font-bold">AWS EKS prod-west</span>
+        <span class="text-[10px] text-muted">(eu-west-1)</span>
+      </div>
+      <span class="text-emerald-500 font-semibold">Ready · 10 Nodes</span>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2 mt-3 pt-2 border-t border-line/60">
+      <div class="p-2 rounded bg-paper-deep/80 border border-line/40">
+        <span class="text-[10px] text-muted uppercase">Health Status</span>
+        <p class="text-sm font-bold text-ink">99.99% Uptime</p>
+      </div>
+      <div class="p-2 rounded bg-paper-deep/80 border border-line/40">
+        <span class="text-[10px] text-muted uppercase">Global Latency</span>
+        <p class="text-sm font-bold text-teal">18ms p95</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Content: GitOps -->
+  <div id="tab-gitops" class="telemetry-content hidden space-y-2.5 font-mono text-xs">
+    <div class="p-2.5 rounded-lg bg-paper/60 border border-line">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-violet font-bold">Application: core-api</span>
+        <span class="text-emerald-500 font-semibold">Synced</span>
+      </div>
+      <p class="text-[11px] text-muted">Repo: github.com/infrastructure/gitops-deployments</p>
+      <p class="text-[11px] text-teal mt-1">Health: Healthy (Blue/Green Rollout Complete)</p>
+    </div>
+
+    <div class="p-2.5 rounded-lg bg-paper/60 border border-line">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-orange font-bold">Helm Chart: ingress-nginx</span>
+        <span class="text-emerald-500 font-semibold">Synced</span>
+      </div>
+      <p class="text-[11px] text-muted">Version: v4.11.2 · Auto-healing Enabled</p>
+    </div>
+  </div>
+
+  <!-- Tab Content: Zero-Trust Security -->
+  <div id="tab-security" class="telemetry-content hidden space-y-2.5 font-mono text-xs">
+    <div class="p-2.5 rounded-lg bg-paper/60 border border-line">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-teal font-bold">Trivy Vulnerability Scan</span>
+        <span class="text-emerald-500 font-semibold">0 Critical</span>
+      </div>
+      <p class="text-[11px] text-muted">All base images verified against CVE registry</p>
+    </div>
+
+    <div class="p-2.5 rounded-lg bg-paper/60 border border-line">
+      <div class="flex items-center justify-between mb-1">
+        <span class="text-violet font-bold">IAM Least-Privilege Policy</span>
+        <span class="text-emerald-500 font-semibold">Enforced</span>
+      </div>
+      <p class="text-[11px] text-muted">IRSA (IAM Roles for Service Accounts) active</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupTelemetryTabs() {
+    const tabs = document.querySelectorAll(".telemetry-tab");
+    const contents = document.querySelectorAll(".telemetry-content");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const target = tab.getAttribute("data-tab");
+
+        tabs.forEach(t => {
+          t.classList.remove("active", "text-violet", "bg-paper-deep", "border", "border-violet/30", "font-semibold");
+          t.classList.add("text-muted");
+        });
+
+        tab.classList.add("active", "text-violet", "bg-paper-deep", "border", "border-violet/30", "font-semibold");
+        tab.classList.remove("text-muted");
+
+        contents.forEach(content => {
+          if (content.id === `tab-${target}`) {
+            content.classList.remove("hidden");
+          } else {
+            content.classList.add("hidden");
+          }
+        });
+      });
+    });
+  }
+
+  setupTelemetryTabs();
+  document.addEventListener("astro:after-swap", setupTelemetryTabs);
+</script>

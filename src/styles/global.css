@@ -1,3 +1,5 @@
+@import "@fontsource-variable/instrument-sans";
+@import "@fontsource-variable/newsreader";
 @import "tailwindcss";
 @import "./theme.css";
 @import "./typography.css";
@@ -6,34 +8,300 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
-  * {
-    @apply border-border outline-accent/75;
-    scrollbar-width: auto;
-    scrollbar-color: var(--color-muted) transparent;
+  *, *::before, *::after {
+    box-sizing: border-box;
+    border-color: var(--line);
   }
-  a,
-  button,
-  #main-content {
-    @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    font-family: var(--font-sans);
   }
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
+
+  body {
+    min-width: 320px;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      radial-gradient(circle at 10% 15%, rgba(124, 98, 255, 0.08), transparent 30rem),
+      radial-gradient(circle at 90% 60%, rgba(255, 104, 66, 0.06), transparent 32rem);
+    background-attachment: fixed;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    transition: color 200ms ease, background-color 200ms ease;
+  }
+
+  ::selection {
+    color: #ffffff;
+    background: var(--violet);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--ink);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.035em;
+  }
+
+  h1 em, h2 em, h3 em, h4 em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--violet);
+    letter-spacing: -0.015em;
+  }
+
+  a, button, [role="button"] {
+    outline-color: var(--violet);
+    outline-offset: 3px;
+  }
+
+  button:not(:disabled), [role="button"]:not(:disabled) {
     cursor: pointer;
   }
 }
 
-@utility max-w-app {
-  @apply max-w-3xl;
+/* Subtle micro-noise texture for tactile paper feel */
+.page-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.025;
+  pointer-events: none;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #000 1px, transparent 1.5px, transparent 4px);
+  background-size: 6px 6px;
+  mix-blend-mode: multiply;
 }
 
-@utility app-layout {
-  @apply max-w-app mx-auto w-full px-4;
+:root[data-theme='dark'] .page-noise {
+  opacity: 0.035;
+  mix-blend-mode: screen;
 }
 
-@utility active-nav {
-  @apply underline decoration-wavy decoration-2 underline-offset-8;
+/* Reading Progress Bar (FreeCodeCamp style) */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--violet), var(--teal));
+  z-index: 1000;
+  transition: width 100ms ease-out;
+}
+
+/* Containers */
+.shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin-inline: auto;
+}
+
+.reading-shell {
+  width: min(780px, calc(100vw - 32px));
+  margin-inline: auto;
+}
+
+.app-layout {
+  width: min(1180px, calc(100vw - 32px));
+  margin-inline: auto;
+}
+
+/* Kicker / Eyebrow labels */
+.section-kicker,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Buttons (Latentfolio style) */
+.btn-primary {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 22px;
+  border-radius: 9999px;
+  background: var(--inverse-surface);
+  color: var(--inverse-ink);
+  font-size: 0.88rem;
+  font-weight: 650;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  background: var(--violet);
+  color: #ffffff;
+  box-shadow: 0 14px 30px var(--violet-glow);
+}
+
+.btn-ghost {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 20px;
+  border-radius: 9999px;
+  border: 1px solid var(--line-strong);
+  background: color-mix(in srgb, var(--paper-light) 65%, transparent);
+  color: var(--ink);
+  font-size: 0.88rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  background: var(--paper-light);
+  border-color: var(--violet);
+  color: var(--violet);
+}
+
+/* Bento Card Geometry */
+.bento-card {
+  position: relative;
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1), border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-subtle);
+}
+
+.bento-card.accent-violet:hover {
+  border-color: var(--violet);
+  box-shadow: 0 16px 40px var(--violet-glow);
+}
+
+.bento-card.accent-teal:hover {
+  border-color: var(--teal);
+  box-shadow: 0 16px 40px rgba(29, 189, 166, 0.16);
+}
+
+.bento-card.accent-orange:hover {
+  border-color: var(--orange);
+  box-shadow: 0 16px 40px rgba(255, 104, 66, 0.16);
+}
+
+/* Proof Bar */
+.proof-item {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--paper-light) 50%, transparent);
+  border: 1px solid var(--line);
+}
+
+.proof-item strong {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--violet);
+}
+
+.proof-item span {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Tags & Badges */
+.pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  background: color-mix(in srgb, var(--violet) 10%, transparent);
+  color: var(--violet);
+  border: 1px solid color-mix(in srgb, var(--violet) 20%, transparent);
+}
+
+.pill-badge.teal {
+  background: color-mix(in srgb, var(--teal) 10%, transparent);
+  color: var(--teal);
+  border-color: color-mix(in srgb, var(--teal) 22%, transparent);
+}
+
+.pill-badge.orange {
+  background: color-mix(in srgb, var(--orange) 10%, transparent);
+  color: var(--orange);
+  border-color: color-mix(in srgb, var(--orange) 22%, transparent);
+}
+
+/* Glass Header */
+.glass-header {
+  position: sticky;
+  top: 12px;
+  z-index: 80;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: color-mix(in srgb, var(--paper) 80%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 200ms ease;
+}
+
+/* FreeCodeCamp + DevOps.com Editorial Code Blocks */
+.prose pre {
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius-md) !important;
+  background: #111016 !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.prose code {
+  font-family: var(--font-mono);
+}
+
+/* Sticky TOC Sidebar */
+.sticky-toc {
+  position: sticky;
+  top: 110px;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+.sticky-toc a {
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.sticky-toc a:hover,
+.sticky-toc a.active {
+  color: var(--violet);
+  border-left-color: var(--violet);
 }
 
 :target {
-  scroll-margin-block: 1rem;
+  scroll-margin-block: 6rem;
 }
