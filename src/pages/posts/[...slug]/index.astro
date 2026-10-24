@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
 import PostLayout from "@/layouts/PostLayout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -9,7 +10,6 @@ import { getPostSlug, getPostUrl } from "@/utils/getPostPaths";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import { slugifyStr } from "@/utils/slugify";
 import { toTransitionName } from "@/utils/toTransitionName";
-import EditPost from "./_components/EditPost.astro";
 import ShareLinks from "./_components/ShareLinks.astro";
 import BackButton from "./_components/BackButton.astro";
 import BackToTopButton from "./_components/BackToTopButton.astro";
@@ -73,7 +73,6 @@ const {
   modDatetime,
   timezone,
   tags,
-  hideEditPost,
 } = post.data;
 
 const { Content } = await render(post);
@@ -100,6 +99,11 @@ const ogImage = ogImageUrl
 
 const readingTime = getReadingTime(post.body);
 const categories = getPostCategories(post);
+
+const allPosts = await getCollection("posts");
+const relatedPosts = allPosts
+  .filter(p => !p.data.draft && p.id !== post.id)
+  .slice(0, 2);
 ---
 
 <PostLayout
@@ -116,61 +120,130 @@ const categories = getPostCategories(post);
 
   <main
     id="main-content"
-    class:list={["app-layout", { "mt-8": !config.features.showBackButton }]}
+    class="reading-shell my-8 space-y-8"
     data-pagefind-body
   >
-    <div class="mb-3 flex flex-wrap gap-2">
-      {categories.map(cat => <CategoryBadge category={cat} size="base" />)}
-    </div>
+    <!-- Article Header -->
+    <header class="space-y-4 pb-6 border-b border-line">
+      <!-- Category & Reading time pills -->
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-2">
+          {categories.map(cat => <CategoryBadge category={cat} size="sm" />)}
+        </div>
+        <div class="flex items-center gap-1.5 text-xs font-mono text-muted bg-paper-deep px-3 py-1 rounded-full border border-line">
+          <span>⏱️</span>
+          <span class="reading-time">{readingTime}</span>
+        </div>
+      </div>
 
-    <h1
-      style={{ viewTransitionName: toTransitionName(post.id) }}
-      class="text-accent inline-block text-2xl font-bold sm:text-3xl"
-    >
-      {title}
-    </h1>
-
-    <div class="my-2 flex flex-wrap items-center gap-x-2 text-muted-foreground">
-      <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" />
-      <span aria-hidden="true">&bull;</span>
-      <span class="reading-time text-sm sm:text-base font-medium">{readingTime}</span>
-      <span
-        aria-hidden="true"
-        class:list={[
-          "text-muted-foreground max-sm:hidden",
-          { hidden: !config.features.editPost?.enabled || hideEditPost },
-        ]}
+      <!-- Title -->
+      <h1
+        style={{ viewTransitionName: toTransitionName(post.id) }}
+        class="text-3xl sm:text-5xl font-extrabold tracking-tight text-ink leading-tight"
       >
-        |
-      </span>
-      <EditPost {hideEditPost} {post} class="max-sm:hidden" />
-    </div>
+        {title}
+      </h1>
 
+      {description && (
+        <p class="text-base sm:text-lg text-muted leading-relaxed">
+          {description}
+        </p>
+      )}
+
+      <!-- Author Credential Bar (FreeCodeCamp / DevOps.com style) -->
+      <div class="flex flex-wrap items-center justify-between gap-4 pt-3 text-xs border-t border-line/60">
+        <div class="flex items-center gap-3">
+          <span class="size-9 rounded-full bg-violet/20 text-violet flex items-center justify-center font-bold text-xs border border-violet/30 shrink-0">
+            CS
+          </span>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-ink">Chetan Soni</span>
+              <span class="text-[10px] uppercase font-bold text-teal px-2 py-0.5 rounded-full bg-teal/10">Verified Author</span>
+            </div>
+            <p class="text-[11px] text-muted">Lead DevOps &amp; Cloud Platform Specialist</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 text-muted">
+          <Datetime {pubDatetime} {modDatetime} {timezone} size="sm" />
+          <a
+            href="https://www.linkedin.com/in/sonichetan/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden sm:inline-flex items-center gap-1 font-semibold text-violet hover:underline"
+          >
+            <span>Follow ↗</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
     <article
       id="article"
-      class:list={[
-        "mt-8 w-full",
-        "app-prose max-w-app",
-        "prose-pre:bg-(--shiki-light-bg) dark:prose-pre:bg-(--shiki-dark-bg)",
-      ]}
+      class="app-prose max-w-none text-ink text-base sm:text-lg leading-relaxed"
     >
       <Content />
     </article>
 
-    <hr class="my-8 border-dashed" />
+    <!-- Tags -->
+    <div class="pt-6 border-t border-line space-y-3">
+      <span class="text-xs uppercase font-bold tracking-wider text-muted font-mono">Article Tags</span>
+      <ul class="flex flex-wrap gap-2">
+        {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
+      </ul>
+    </div>
 
-    <EditPost class="sm:hidden" {hideEditPost} {post} />
+    <!-- Social Share Bar (DevOps.com style) -->
+    <div class="bento-card p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <span class="text-xs font-semibold text-ink">Found this guide helpful? Share with your team:</span>
+      <ShareLinks />
+    </div>
+
+    <!-- Author Bio Card (FreeCodeCamp style) -->
+    <div class="bento-card accent-violet p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-5">
+      <div class="size-14 rounded-full bg-violet/20 text-violet flex items-center justify-center font-bold text-lg border-2 border-violet/30 shrink-0">
+        CS
+      </div>
+      <div class="space-y-2 text-center sm:text-left">
+        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+          <h3 class="text-base font-bold text-ink">About Chetan Soni</h3>
+          <span class="pill-badge">Cloud Platform Specialist</span>
+        </div>
+        <p class="text-xs sm:text-sm text-muted leading-relaxed">
+          Chetan is a Lead DevOps Engineer specializing in Multi-Cloud Kubernetes, Zero-Trust Infrastructure as Code with Terraform, and Automated GitOps with ArgoCD. He designs mission-critical platforms and writes production-ready technical guides.
+        </p>
+        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-1 text-xs font-semibold">
+          <a href="https://www.linkedin.com/in/sonichetan/" target="_blank" rel="noopener noreferrer" class="text-violet hover:underline">LinkedIn ↗</a>
+          <a href="https://github.com/ErChetanSoni" target="_blank" rel="noopener noreferrer" class="text-violet hover:underline">GitHub ↗</a>
+          <a href="https://calendar.app.google/umYxcjewLfQ1PRwJ9" target="_blank" rel="noopener noreferrer" class="text-teal hover:underline">Book a Call ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Articles Grid (DevOps.com style) -->
+    {relatedPosts.length > 0 && (
+      <div class="pt-6 border-t border-line space-y-4">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg sm:text-xl font-bold text-ink">
+            Recommended <em class="font-serif italic font-normal text-violet">Reading</em>
+          </h3>
+          <a href={getRelativeLocaleUrl(locale, "posts")} class="text-xs font-semibold text-violet hover:underline">All articles &rarr;</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {relatedPosts.map(rp => (
+            <a href={getPostUrl(rp.id, rp.filePath, locale)} class="bento-card hover:border-violet/40 p-4 block group">
+              <span class="text-[11px] font-mono text-muted">{getReadingTime(rp.body)}</span>
+              <h4 class="font-bold text-base text-ink group-hover:text-violet transition-colors mt-1 mb-2 line-clamp-2">{rp.data.title}</h4>
+              <p class="text-xs text-muted line-clamp-2">{rp.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
 
     <BackToTopButton />
-
-    <ul class="mt-4 mb-8 flex flex-wrap gap-4 sm:my-8">
-      {tags.map(tag => <Tag tag={slugifyStr(tag)} tagName={tag} size="sm" />)}
-    </ul>
-
-    <ShareLinks />
-
-    <hr class="my-8 border-dashed" />
-
     <AdjacentPostNav {prevPost} {nextPost} />
   </main>
   <Footer />

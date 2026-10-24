@@ -16,28 +16,55 @@ const { variant: Heading = "h2", id, data, filePath, body } = post;
 const { title, description, ...props } = data;
 const readingTime = getReadingTime(body);
 const categories = getPostCategories(post);
+const postUrl = getPostUrl(id, filePath, Astro.currentLocale);
 ---
 
-<li class="my-6">
-  <div class="mb-1 flex flex-wrap items-center gap-2">
-    {categories.map(cat => <CategoryBadge category={cat} size="sm" />)}
-  </div>
-  <a
-    href={getPostUrl(id, filePath, Astro.currentLocale)}
-    class:list={[
-      "text-accent inline-block text-lg font-medium",
-      "decoration-dashed underline-offset-4 hover:underline",
-      "focus-visible:no-underline focus-visible:underline-offset-0",
-    ]}
-  >
-    <Heading transition:name={toTransitionName(id)}>
-      {title}
-    </Heading>
-  </a>
-  <div class="flex flex-wrap items-center gap-x-2 text-sm text-muted-foreground">
-    <Datetime {...props} />
-    <span aria-hidden="true">&bull;</span>
-    <span class="reading-time">{readingTime}</span>
-  </div>
-  <p class="mt-1">{description}</p>
+<li class="my-6 list-none">
+  <article class="bento-card group hover:border-violet/40 hover:shadow-lg transition-all duration-200">
+    <!-- Meta Header Row -->
+    <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+      <div class="flex flex-wrap items-center gap-2">
+        {categories.map(cat => <CategoryBadge category={cat} size="sm" />)}
+      </div>
+      <div class="flex items-center gap-2 text-xs text-muted font-medium">
+        <Datetime {...props} />
+        <span aria-hidden="true">&bull;</span>
+        <span class="reading-time flex items-center gap-1 font-mono text-xs">
+          <span>{readingTime}</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Title with link -->
+    <a
+      href={postUrl}
+      class="block text-xl sm:text-2xl font-bold tracking-tight text-ink group-hover:text-violet transition-colors my-2"
+    >
+      <Heading transition:name={toTransitionName(id)}>
+        {title}
+      </Heading>
+    </a>
+
+    <!-- Description -->
+    <p class="text-sm sm:text-base text-muted line-clamp-2 leading-relaxed mb-4">
+      {description}
+    </p>
+
+    <!-- Card Action Footer -->
+    <div class="flex items-center justify-between pt-3 border-t border-line/60 text-xs">
+      <div class="flex items-center gap-2">
+        <span class="size-5 rounded-full bg-violet/20 text-violet flex items-center justify-center font-bold text-[10px]">
+          CS
+        </span>
+        <span class="font-medium text-muted">Chetan Soni</span>
+      </div>
+      <a
+        href={postUrl}
+        class="inline-flex items-center gap-1 font-semibold text-violet hover:underline text-xs group-hover:translate-x-0.5 transition-transform"
+      >
+        <span>Read full guide</span>
+        <span>&rarr;</span>
+      </a>
+    </div>
+  </article>
 </li>

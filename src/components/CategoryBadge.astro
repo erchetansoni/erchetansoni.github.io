@@ -17,14 +17,12 @@ const locale = Astro.currentLocale ?? config.site.lang;
 <a
   href={getRelativeLocaleUrl(locale, `categories/${slug}/`)}
   class:list={[
-    "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 font-medium transition-colors",
-    "bg-accent/10 text-accent hover:bg-accent hover:text-accent-foreground dark:bg-accent/20",
-    "border border-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
-    { "text-xs": size === "sm" },
-    { "text-sm": size === "base" },
+    "inline-flex items-center gap-1.5 rounded-full font-semibold transition-all duration-150",
+    "bg-violet/10 text-violet hover:bg-violet hover:text-white border border-violet/25 shadow-xs",
+    size === "sm" ? "px-2.5 py-0.5 text-xs" : "px-3.5 py-1 text-sm",
   ]}
 >
-  <span class="size-1.5 rounded-full bg-accent"></span>
+  <span class="size-1.5 rounded-full bg-violet"></span>
   <span>{category}</span>
   {count !== undefined && <span class="opacity-75 text-[0.85em]">({count})</span>}
 </a>
