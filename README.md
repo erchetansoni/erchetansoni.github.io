@@ -6,7 +6,7 @@
 
   [![Portfolio](https://img.shields.io/badge/Portfolio-ErChetanSoni.github.io-6366f1?style=for-the-badge&logo=github&logoColor=white)](https://ErChetanSoni.github.io/)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-sonichetan-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sonichetan/)
-  [![Email](https://img.shields.io/badge/Email-chetansoni9991%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:chetansoni9991@gmail.com)
+  [![Email](https://img.shields.io/badge/Email-chetansoni9991%40gmail.com-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ErChetanSoni@gmail.com)
   
   ![Profile Views](https://komarev.com/ghpvc/?username=ErChetanSoni&style=for-the-badge&color=6366f1)
   ![Followers](https://img.shields.io/github/followers/ErChetanSoni?style=for-the-badge&color=6366f1)
@@ -189,7 +189,7 @@ gantt
 |:--------:|:----:|
 | 🌐 **Portfolio** | [ErChetanSoni.github.io](https://ErChetanSoni.github.io/) |
 | 💼 **LinkedIn** | [linkedin.com/in/sonichetan](https://www.linkedin.com/in/sonichetan/) |
-| 📧 **Email** | [chetansoni9991@gmail.com](mailto:chetansoni9991@gmail.com) |
+| 📧 **Email** | [ErChetanSoni@gmail.com](mailto:ErChetanSoni@gmail.com) |
 | 🐙 **GitHub** | [github.com/ErChetanSoni](https://github.com/ErChetanSoni) |
 
 </div>

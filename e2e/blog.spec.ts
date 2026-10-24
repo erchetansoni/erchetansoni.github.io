@@ -41,8 +41,8 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
     // Social and direct contact links
     await expect(page.locator('a[href*="github.com/ErChetanSoni"]').first()).toBeVisible();
     await expect(page.locator('a[href*="linkedin.com/in/sonichetan"]').first()).toBeVisible();
-    await expect(page.locator('a[href*="mailto:chetansoni9991@gmail.com"]').first()).toBeVisible();
-    await expect(page.locator('a[href*="wa.me"]').first()).toBeVisible();
+    await expect(page.locator('a[href*="mailto:ErChetanSoni@gmail.com"]').first()).toBeVisible();
+    await expect(page.locator('a[href*="t.me/ErChetanSoni"]').first()).toBeVisible();
     await expect(page.locator('a[href*="calendar.app.google"]').first()).toBeVisible();
 
     // Resume download link verification
