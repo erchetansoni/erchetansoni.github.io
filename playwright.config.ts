@@ -8,7 +8,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: [["html", { open: "never" }], ["list"]],
   use: {
-    baseURL: "http://localhost:4321",
+    baseURL: "http://localhost:4322",
     trace: "on-first-retry",
   },
   projects: [
@@ -22,8 +22,8 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run preview -- --port 4321",
-    url: "http://localhost:4321",
+    command: "npm run preview -- --port 4322",
+    url: "http://localhost:4322",
     reuseExistingServer: true,
     timeout: 120 * 1000,
   },

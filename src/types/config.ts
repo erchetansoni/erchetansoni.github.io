@@ -9,6 +9,8 @@ interface SiteConfig {
   author: string;
   /** Author profile URL (used in structured data) */
   profile?: string;
+  /** Author avatar image URL */
+  avatar?: string;
   /** Fallback OG image filename in /public, e.g. "og.jpg" */
   ogImage?: string;
   /** HTML lang attribute, defaults to "en" */
@@ -109,6 +111,7 @@ type ResolvedSiteConfig = Required<
     | "title"
     | "description"
     | "author"
+    | "avatar"
     | "lang"
     | "timezone"
     | "dir"

@@ -21,8 +21,16 @@ const currentYear = new Date().getFullYear();
   <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pb-6">
     <!-- Brand Info -->
     <div class="flex items-center gap-3">
-      <span class="size-8 rounded-full bg-violet/15 text-violet flex items-center justify-center font-bold text-xs border border-violet/30">
-        CS
+      <span class="size-8 rounded-full overflow-hidden border border-line bg-violet/15 flex items-center justify-center shrink-0 shadow-xs">
+        <img
+          src={config.site.avatar}
+          alt={config.site.author}
+          width="32"
+          height="32"
+          class="size-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
       </span>
       <div>
         <p class="font-bold text-ink text-sm">Chetan Soni</p>

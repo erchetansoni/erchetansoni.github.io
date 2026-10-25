@@ -7,6 +7,7 @@ export default defineAstroPaperConfig({
     description: "Lead DevOps Engineer, Cloud Platform Specialist & Gen-AI practitioner. Technical insights on Kubernetes, Multi-Cloud Architecture, Terraform, CI/CD and Platform Engineering.",
     author: "Chetan Soni",
     profile: "https://erchetansoni.github.io/about/",
+    avatar: "https://avatars.githubusercontent.com/u/169386751?v=4",
     ogImage: "default-og.jpg",
     lang: "en",
     timezone: "Asia/Kolkata",
@@ -30,7 +31,7 @@ export default defineAstroPaperConfig({
   socials: [
     { name: "github", url: "https://github.com/ErChetanSoni" },
     { name: "linkedin", url: "https://www.linkedin.com/in/sonichetan/" },
-    { name: "mail", url: "mailto:ErChetanSoni@gmail.com" },
+    { name: "mail", url: "mailto:ErChetanSoni1@gmail.com" },
     { name: "telegram", url: "https://t.me/ErChetanSoni" },
   ],
   shareLinks: [

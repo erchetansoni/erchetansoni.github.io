@@ -13,6 +13,9 @@ const DEFAULT_OG_IMAGE = "default-og.jpg";
 const config: ResolvedAstroPaperConfig = {
   site: {
     ...userConfig.site,
+    avatar:
+      userConfig.site.avatar ??
+      "https://avatars.githubusercontent.com/u/169386751?v=4",
     ogImage: userConfig.site.ogImage ?? DEFAULT_OG_IMAGE,
     lang: userConfig.site.lang ?? "en",
     timezone: userConfig.site.timezone ?? "UTC",
