@@ -43,8 +43,16 @@ const isActive = (path: string) => {
       class="group flex items-center gap-2.5 focus:outline-none"
       title="Chetan Soni - Home"
     >
-      <span class="size-8 rounded-full bg-violet/15 text-violet flex items-center justify-center font-bold text-xs border border-violet/30 group-hover:scale-105 transition-transform">
-        CS
+      <span class="size-8 rounded-full overflow-hidden border border-line bg-violet/15 flex items-center justify-center group-hover:scale-105 group-hover:border-violet/40 transition-all shrink-0 shadow-xs">
+        <img
+          src={config.site.avatar}
+          alt={config.site.author}
+          width="32"
+          height="32"
+          class="size-full object-cover"
+          loading="eager"
+          decoding="async"
+        />
       </span>
       <div class="flex flex-col">
         <span class="font-bold text-sm tracking-tight text-ink group-hover:text-violet transition-colors">

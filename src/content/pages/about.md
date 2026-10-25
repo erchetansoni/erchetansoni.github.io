@@ -88,5 +88,5 @@ gantt
 - 📅 **Schedule a Meeting**: [Book a time slot on Google Calendar](https://calendar.app.google/umYxcjewLfQ1PRwJ9)
 - 💼 **LinkedIn**: [linkedin.com/in/sonichetan](https://www.linkedin.com/in/sonichetan/)
 - 🐙 **GitHub**: [github.com/ErChetanSoni](https://github.com/ErChetanSoni)
-- 📧 **Email**: [ErChetanSoni@gmail.com](mailto:ErChetanSoni@gmail.com)
+- 📧 **Email**: [ErChetanSoni1@gmail.com](mailto:ErChetanSoni1@gmail.com)
 - 💬 **Telegram**: [@ErChetanSoni](https://t.me/ErChetanSoni) · [Open in App](tg://resolve?domain=ErChetanSoni)
