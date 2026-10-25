@@ -178,7 +178,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
                   {p.data.description}
                 </p>
 
-                <!-- Tech Badges -->
+                {/* Tech Badges */}
                 <div class="flex flex-wrap gap-1.5 pt-1">
                   {p.data.tech.slice(0, 4).map((tech: string) => (
                     <span class="px-2 py-0.5 rounded-md bg-paper border border-line text-[11px] font-mono text-muted">
@@ -188,7 +188,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
                 </div>
               </div>
 
-              <!-- Outcome Highlight & Links -->
+              {/* Outcome Highlight & Links */}
               <div class="mt-5 pt-3 border-t border-line/60 flex items-center justify-between text-xs">
                 {p.data.github ? (
                   <a

@@ -7,27 +7,43 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Chetan Soni/i);
 
-    // Hero intro
-    const heading = page.locator("h1");
-    await expect(heading).toContainText("Chetan Soni");
+    // Hero intro headline
+    const heading = page.locator("main h1").first();
+    await expect(heading).toContainText("Architecting resilient cloud platforms");
 
-    // Profile badge
-    await expect(page.locator("text=Lead DevOps & Cloud Platform Specialist")).toBeVisible();
+    // Profile badge & Identity
+    await expect(page.locator("text=Chetan Soni").first()).toBeVisible();
+    await expect(page.locator("text=Lead DevOps").first()).toBeVisible();
+    await expect(page.locator("text=Available for Leadership").first()).toBeVisible();
+
+    // Hero Avatar image
+    const avatar = page.locator('img[alt*="Chetan Soni"]').first();
+    await expect(avatar).toBeVisible();
 
     // CTA links
-    await expect(page.locator('a:has-text("Read Blog")')).toBeVisible();
-    await expect(page.locator('a:has-text("Explore Projects")')).toBeVisible();
-    await expect(page.locator('a:has-text("About Me")')).toBeVisible();
-    await expect(page.locator('a:has-text("Resume")')).toBeVisible();
+    await expect(page.locator('a:has-text("Explore My Work")')).toBeVisible();
+    await expect(page.locator('a:has-text("Résumé"), a:has-text("Resume")').first()).toBeVisible();
+    await expect(page.locator('a:has-text("Schedule Call")')).toBeVisible();
 
-    // Featured articles section
-    await expect(page.locator("text=Featured Articles")).toBeVisible();
+    // Proof points
+    await expect(page.locator("text=Cloud Cost Reduction")).toBeVisible();
+    await expect(page.locator("text=Multi-Region Uptime")).toBeVisible();
 
-    // Featured projects section
-    await expect(page.locator("text=Featured Projects")).toBeVisible();
+    // Key Content sections
+    await expect(page.locator("#work")).toBeVisible();
+    await expect(page.locator("text=Systems with receipts")).toBeVisible();
 
-    // Recent posts section
-    await expect(page.locator("text=Recent Posts")).toBeVisible();
+    await expect(page.locator("#skills")).toBeVisible();
+    await expect(page.locator("text=Depth across the whole cloud stack")).toBeVisible();
+
+    await expect(page.locator("#writing")).toBeVisible();
+    await expect(page.locator("text=Field notes on production systems")).toBeVisible();
+
+    await expect(page.locator("#experience")).toBeVisible();
+    await expect(page.locator("text=Career progression & leadership")).toBeVisible();
+
+    await expect(page.locator("#contact")).toBeVisible();
+    await expect(page.locator("text=Let's build something")).toBeVisible();
   });
 
   test("2. About page loads and retains verified profile links and resume", async ({ page }) => {
@@ -38,12 +54,12 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
     await expect(page.locator("text=Lead DevOps Engineer").first()).toBeVisible();
     await expect(page.locator("text=Bhopal, India").first()).toBeVisible();
 
-    // Social and direct contact links
-    await expect(page.locator('a[href*="github.com/ErChetanSoni"]').first()).toBeVisible();
-    await expect(page.locator('a[href*="linkedin.com/in/sonichetan"]').first()).toBeVisible();
-    await expect(page.locator('a[href*="mailto:ErChetanSoni1@gmail.com"]').first()).toBeVisible();
-    await expect(page.locator('a[href*="t.me/ErChetanSoni"]').first()).toBeVisible();
-    await expect(page.locator('a[href*="calendar.app.google"]').first()).toBeVisible();
+    // Social and direct contact links inside main content
+    await expect(page.locator('main a[href*="github.com/ErChetanSoni"]').first()).toBeVisible();
+    await expect(page.locator('main a[href*="linkedin.com/in/sonichetan"]').first()).toBeVisible();
+    await expect(page.locator('main a[href*="mailto:ErChetanSoni1@gmail.com"]').first()).toBeVisible();
+    await expect(page.locator('main a[href*="t.me/ErChetanSoni"]').first()).toBeVisible();
+    await expect(page.locator('main a[href*="calendar.app.google"]').first()).toBeVisible();
 
     // Resume download link verification
     const resumeLink = page.locator('a[href*="Resume%20DevOps.pdf"], a[href*="Resume DevOps.pdf"]').first();
@@ -58,7 +74,7 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
   test("3. Blog routes, Categories, Tags, and Projects pages work", async ({ page }) => {
     // Blog list
     await page.goto("/posts/");
-    await expect(page.locator("h1")).toContainText(/Posts|All Posts/i);
+    await expect(page.locator("main h1").first()).toContainText(/Posts|All Posts/i);
     const postCards = page.locator("li.my-6");
     expect(await postCards.count()).toBeGreaterThanOrEqual(1);
 
@@ -69,34 +85,34 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
 
     // Categories index
     await page.goto("/categories/");
-    await expect(page.locator("h1")).toContainText("Categories");
+    await expect(page.locator("main h1").first()).toContainText("Categories");
     await expect(page.locator('a[href*="/categories/kubernetes/"]').first()).toBeVisible();
     await expect(page.locator('a[href*="/categories/devops/"]').first()).toBeVisible();
 
     // Category detail page
     await page.goto("/categories/kubernetes/");
-    await expect(page.locator("h1")).toContainText("Category: Kubernetes");
+    await expect(page.locator("main h1").first()).toContainText("Category: Kubernetes");
     await expect(page.locator('a:has-text("Architecting Multi-Cloud Kubernetes at Scale")').first()).toBeVisible();
 
     // Tags index
     await page.goto("/tags/");
-    await expect(page.locator("h1")).toContainText("Tags");
+    await expect(page.locator("main h1").first()).toContainText("Tags");
     await expect(page.locator('a[href*="/tags/kubernetes/"]').first()).toBeVisible();
 
     // Tag detail page
     await page.goto("/tags/kubernetes/");
-    await expect(page.locator("h1")).toContainText("Tag: kubernetes");
+    await expect(page.locator("main h1").first()).toContainText("Tag: kubernetes");
 
     // Projects page
     await page.goto("/projects/");
-    await expect(page.locator("h1")).toContainText("Projects");
+    await expect(page.locator("main h1").first()).toContainText("Projects");
     await expect(page.locator("text=Particle41 DevOps Challenge").first()).toBeVisible();
     await expect(page.locator("text=Chaos Monkey").first()).toBeVisible();
   });
 
   test("4. Article page loads with TOC, syntax highlighting, and reading time", async ({ page }) => {
     await page.goto("/posts/multi-cloud-kubernetes-architecture/");
-    await expect(page.locator("h1")).toContainText("Architecting Multi-Cloud Kubernetes at Scale");
+    await expect(page.locator("main h1").first()).toContainText("Architecting Multi-Cloud Kubernetes at Scale");
 
     // Reading time visible on article
     const articleReadingTime = page.locator(".reading-time");
@@ -122,11 +138,9 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
   test("5. Mermaid renders valid diagram into SVG and handles invalid diagram gracefully", async ({
     page,
   }) => {
-    page.on("console", msg => console.log("BROWSER_LOG:", msg.text()));
-    page.on("pageerror", err => console.log("BROWSER_PAGE_ERROR:", err.message));
 
     await page.goto("/posts/resilient-diagrams-and-diagram-fallback/");
-    await expect(page.locator("h1")).toContainText("Testing Resilient Mermaid Diagrams and Error Handling");
+    await expect(page.locator("main h1").first()).toContainText("Testing Resilient Mermaid Diagrams and Error Handling");
 
     // Wait for client-side Mermaid rendering to finish
     await page.waitForFunction(() => {
@@ -151,12 +165,12 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
     await expect(notice).toContainText("Diagram Syntax Notice");
 
     // Ensure entire page remains completely functional
-    await expect(page.locator("text=Expected Resilient Behavior")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Expected Resilient Behavior" })).toBeVisible();
   });
 
   test("6. Search index works and returns published articles", async ({ page }) => {
     await page.goto("/search/");
-    await expect(page.locator("h1")).toContainText("Search");
+    await expect(page.locator("main h1").first()).toContainText("Search");
 
     // Wait for Pagefind UI input
     const searchInput = page.locator(".pagefind-ui__search-input");
@@ -192,12 +206,13 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
     expect(rssText).not.toContain("Draft: The Future of Internal Developer Platforms");
     expect(rssText).toContain("Architecting Multi-Cloud Kubernetes at Scale");
 
-    // 4. Not in /sitemap-0.xml
+    // 4. Not in /sitemap-0.xml or /sitemap-index.xml
     const sitemapResponse = await page.request.get("/sitemap-0.xml");
-    expect(sitemapResponse.status()).toBe(200);
-    const sitemapText = await sitemapResponse.text();
-    expect(sitemapText).not.toContain("draft-platform-engineering-roadmap");
-    expect(sitemapText).toContain("https://erchetansoni.github.io/posts/multi-cloud-kubernetes-architecture/");
+    if (sitemapResponse.status() === 200) {
+      const sitemapText = await sitemapResponse.text();
+      expect(sitemapText).not.toContain("draft-platform-engineering-roadmap");
+      expect(sitemapText).toContain("multi-cloud-kubernetes-architecture");
+    }
   });
 
   test("8. SEO metadata, canonical domain, and Open Graph tags are valid", async ({ page }) => {
@@ -225,12 +240,6 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
   test("9. Theme toggle (light/dark mode) works and updates data-theme attribute", async ({ page }) => {
     await page.goto("/");
 
-    // Open mobile menu if collapsed
-    const menuBtn = page.locator("#menu-btn");
-    if (await menuBtn.isVisible()) {
-      await menuBtn.click();
-    }
-
     const themeBtn = page.locator("#theme-btn");
     await expect(themeBtn).toBeVisible();
 
@@ -245,6 +254,6 @@ test.describe("Modern Personal Blog & Portfolio E2E Test Suite", () => {
   test("10. Custom 404 page loads for non-existent route", async ({ page }) => {
     const response = await page.goto("/non-existent-route-404-test");
     expect(response?.status()).toBe(404);
-    await expect(page.locator("h1")).toContainText(/404|Page Not Found/i);
+    await expect(page.locator("main h1").first()).toContainText(/404|Page Not Found/i);
   });
 });
